@@ -1,0 +1,32 @@
+.navbar {
+    background-color: #2a008c;
+    color: #fff;
+}
+
+.navbar-brand {
+    margin-left: 2%;
+}
+
+.navbar img {
+    border-radius: 5px;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.nav-link:hover {
+    color: #c42a4c;
+}
+
+h1 {
+    font-family: 'Gochi Hand', serif;
+    font-size: 44px;
+    color: #c42a4c;
+}
+
+p {
+    font-family: 'Gochi Hand', serif;
+    font-size: 34px;
+    color: #2a008c;
+}
