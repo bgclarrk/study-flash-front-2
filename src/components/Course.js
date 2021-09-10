@@ -14,18 +14,18 @@ class Course {
         const courseCard = document.createElement("div");
         courseCard.classList.add("card");
         
-        // const courseName = document.createElement("div");
-        // courseName.classList.add("card-title");
-        // courseName.innerHTML = `${this.name}`;
-        // courseCard.appendChild(courseName);
+        const courseName = document.createElement("div");
+        courseName.classList.add("card-title");
+        courseName.innerHTML = `${this.name}`;
+        courseCard.appendChild(courseName);
         
-        // const courseDescription = document.createElement("div");
-        // courseDescription.classList.add("card-text");
-        // courseDescription.innerHTML = `${this.description}`;
-        // courseCard.appendChild(courseDescription);
+        const courseDescription = document.createElement("div");
+        courseDescription.classList.add("card-text");
+        courseDescription.innerHTML = `${this.description}`;
+        courseCard.appendChild(courseDescription);
 
         // const courseButton = document.createElement("a");
-        // const courseLink
+        // // const courseLink
         // courseButton.classList.add("btn btn-primary");
         // courseButton.innerHTML = `${this.name}`;
         // courseCard.appendChild(courseButton);
