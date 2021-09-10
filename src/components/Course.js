@@ -6,36 +6,36 @@ class Course {
         this.constructor.all.push(this);
     }
 
-    static add(course) {
-        new Course(course);
+    renderCard = () => {
+        const {name, description, id} = this.data;
+        document.getElementById("course-row").innerHTML += `
+        <div class="col-sm-4">
+            <div class="course-card">
+                <div class="card-body">
+                    <div class="card-title">${name}</div>
+                    <div class="card-text">${description}</div>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>`
     }
 
     static renderIndex() {
-        const courseCard = document.createElement("div");
-        courseCard.classList.add("card");
-        
-        const courseName = document.createElement("div");
-        courseName.classList.add("card-title");
-        courseName.innerHTML = `${this.name}`;
-        courseCard.appendChild(courseName);
-        
-        const courseDescription = document.createElement("div");
-        courseDescription.classList.add("card-text");
-        courseDescription.innerHTML = `${this.description}`;
-        courseCard.appendChild(courseDescription);
+        const courseContainer = document.createElement("div");
+        courseContainer.classList.add("course-container");
 
-        // const courseButton = document.createElement("a");
-        // // const courseLink
-        // courseButton.classList.add("btn btn-primary");
-        // courseButton.innerHTML = `${this.name}`;
-        // courseCard.appendChild(courseButton);
-
-        document.getElementById("main").appendChild(courseCard);
+        const courseRow = document.createElement("div");
+        courseRow.classList.add("row");
+        courseRow.id = "course-row";
+        courseContainer.appendChild(courseRow);
+        
+        document.getElementById("main").appendChild(courseContainer);
+        this.all.forEach(course => course.renderCard());
     }
 
     static getCourses() {
         api.getCourses().then(courses => {
-            courses.forEach(course => Course.add(course));
+            courses.forEach(course => new Course(course));
             this.renderIndex();
         })
     }
