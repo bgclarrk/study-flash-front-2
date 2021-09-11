@@ -23,12 +23,18 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">New Course</a>
+                        <a class="nav-link" onClick="showModal();" href="#">New Course</a>
                     </li>
                 </ul>
             </div>
         </nav>
         <main>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Create a new course</p>
+            </div>
+        </div>
             <div class="col-lg text-center">
                 <h1>Study Flash</h1>
                 <h3>A simple source for flash card studying.</h3>
