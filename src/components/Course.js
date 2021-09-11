@@ -6,6 +6,7 @@ class Course {
         this.constructor.all.push(this);
     }
 
+    // Show page for an individual course
     renderShow = () => {
         const {name, description, id} = this.data;
         document.getElementById("main").innerHTML = `
@@ -18,6 +19,7 @@ class Course {
         document.getElementById("back").addEventListener("click", Course.renderIndex);
     }
 
+    // Creates cards for all existing courses from the course api
     renderCard = () => {
         const {name, description, id} = this.data;
         document.getElementById("course-row").innerHTML += `
@@ -35,6 +37,7 @@ class Course {
         });
     }
 
+    // Form in modal for a user to submit a new course
     static openHouseForm = () => {
         modal.main.innerHTML = "";
         modal.main.innerHTML += `
@@ -50,17 +53,27 @@ class Course {
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
-        `
+        `;
+        document.querySelector("form").addEventListener("submit", this.handleSubmit);
         modal.open();
     }
 
+    // Find course based on course id
     static find = (id) => this.all.find(course => course.data.id == id);
 
+    // Allows users to click the course card and be shown that course
     static handleIndexClick = (e) => {
         const id = e.target.dataset.id;
         this.find(id).renderShow();
     }
 
+    // Handle the submit from the new course modal
+    static handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Submitted");
+    }
+
+    // Creates the necessary elements to display the course cards
     static renderIndex = () => {
         const courseContainer = document.createElement("div");
         courseContainer.classList.add("course-container");
@@ -76,6 +89,7 @@ class Course {
         this.all.forEach(course => course.renderCard());
     }
 
+    // Retrieve all courses from the api
     static getCourses = () => {
         api.getCourses().then(courses => {
             courses.forEach(course => new Course(course));
