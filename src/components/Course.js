@@ -35,6 +35,25 @@ class Course {
         });
     }
 
+    static openHouseForm = () => {
+        modal.main.innerHTML = "";
+        modal.main.innerHTML += `
+        <h3 class="text-center">Create a new course</h3>
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Course name...">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="description" placeholder="Course description...">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        `
+        modal.open();
+    }
+
     static find = (id) => this.all.find(course => course.data.id == id);
 
     static handleIndexClick = (e) => {

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./assets/css/style.css">
         <script src="./src/services/ApiService.js"></script>
         <script src="./src/components/Course.js"></script>
+        <script src="src/components/Modal.js"></script>
         <script defer src="./src/index.js"></script>
         <title>Study Flash</title>
     </head>
@@ -23,7 +24,7 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onClick="showModal();" href="#">New Course</a>
+                        <a class="nav-link" onClick="Course.openHouseForm();" href="#">New Course</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +33,7 @@
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Create a new course</p>
+                <div id="modal-main"></div>
             </div>
         </div>
             <div class="col-lg text-center">
