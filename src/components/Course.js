@@ -70,7 +70,10 @@ class Course {
     // Handle the submit from the new course modal
     static handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submitted");
+        const newCourse = {
+            name: e.target.name.value,
+            description: e.target.description.value
+        }
     }
 
     // Creates the necessary elements to display the course cards
