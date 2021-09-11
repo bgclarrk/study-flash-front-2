@@ -38,16 +38,15 @@ class Course {
     }
 
     // Form in modal for a user to submit a new course
-    static openHouseForm = () => {
-        modal.main.innerHTML = "";
-        modal.main.innerHTML += `
+    static openCourseForm = () => {
+        modal.main.innerHTML = `
         <h3 class="text-center">Create a new course</h3>
         <form>
             <div class="form-group">
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Course name...">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="description" placeholder="Course description...">
+                <input type="text" class="form-control" id="description" placeholder="Course description...">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -73,7 +72,12 @@ class Course {
         const newCourse = {
             name: e.target.name.value,
             description: e.target.description.value
-        }
+        };
+        api.createCourse(newCourse).then(course => {
+            new Course(course).renderCard();
+        });
+        modal.close();
+        e.target.reset();
     }
 
     // Creates the necessary elements to display the course cards
