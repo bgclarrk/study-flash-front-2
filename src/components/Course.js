@@ -6,7 +6,7 @@ class Course {
         this.constructor.all.push(this);
     }
 
-    // Show page for an individual course
+    // Show page for an individual card
     renderShow = () => {
         const {name, description, id} = this.data;
         document.getElementById("main").innerHTML = `
@@ -17,6 +17,7 @@ class Course {
         </div>
         `
         document.getElementById("back").addEventListener("click", Course.renderIndex);
+        Card.getCards();
     }
 
     // Creates cards for all existing courses from the course api

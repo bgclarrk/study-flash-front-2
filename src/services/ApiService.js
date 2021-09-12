@@ -16,4 +16,6 @@ class ApiService {
         })
         .then(resp => resp.json())
     }
+
+    getCards = () => fetch(this.api + "/cards").then(resp => resp.json());
 }
