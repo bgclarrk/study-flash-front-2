@@ -82,3 +82,13 @@ h3 {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* CSS for flash cards */
+
+.card-container {
+    padding-top: 10%;
+}
+
+.card-body {
+    background-image: url(../img/noteCard.jpg);
+}
