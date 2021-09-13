@@ -49,4 +49,15 @@ class ApiService {
         .then(resp => resp.json())
     }
 
+    deleteCourseCard = (card) => {
+        return fetch(this.api + "/courses/" + card.course_id + "/cards/" + card.id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(card),
+        })
+        .then(resp => resp.json())
+    }
+
 }

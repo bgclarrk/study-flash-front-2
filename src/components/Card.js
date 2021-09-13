@@ -17,11 +17,17 @@ class Card {
                     <div class="card-text definition" data-id="${id}">
                         Click to See Definition
                     </div>
+                    <div class="text-center">
+                        <a id="delete-card" data-id="${id}" class="btn btn-danger" href="#">Delete Flash Card</a>
+                    </div>
                 </div>
             </div>
         </div>`
-        document.querySelectorAll(`.definition`).forEach(definition => {
+        document.querySelectorAll(".definition").forEach(definition => {
             definition.addEventListener("click", Card.handleFlipClick);
+        });
+        document.querySelectorAll(`#delete-card`).forEach(deleteButton => {
+            deleteButton.addEventListener("click", Card.handleDeleteClick);
         });
     }
 
@@ -57,6 +63,18 @@ class Card {
         } else {
             e.target.innerHTML = "Click to See Definition";
         }
+    }
+
+    deleteCard = (id) => {
+        let card = Card.all.find(card => card.data.id == id)
+        api.deleteCourseCard(card.data)
+    }
+
+    // Handle the flash card delete button
+    static handleDeleteClick = (e) => {
+        e.preventDefault();
+        const id = e.target.dataset.id
+        this.find(id).deleteCard(id);
     }
 
     // Find a specific flash card
