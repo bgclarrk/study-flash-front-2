@@ -26,6 +26,10 @@ h1 {
     color: #c42a4c;
 }
 
+h2, .show > p {
+    color: #fff;
+}
+
 h3 {
     font-family: 'Gochi Hand', serif;
     font-size: 34px;
@@ -34,6 +38,9 @@ h3 {
 
 .show {
     padding: 3%;
+    background-color: #2a008c;
+    border-radius: 20px;
+    box-shadow: 0 0 5px 5px rgba(192, 194, 196, 0.9);
 }
 
 .course-card {
@@ -53,7 +60,7 @@ h3 {
     margin-top: 3%;
 }
 
-#back {
+#back, #new {
     margin-top: 1%;
 }
 

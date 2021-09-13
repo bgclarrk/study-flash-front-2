@@ -13,7 +13,8 @@ class Course {
         <div class="show text-center">
             <h2>${name}</h2>
             <p>${description}</p>
-            <a href="#" id="back" class="btn btn-primary">Back</a>
+            <a href="#" id="new" class="btn btn-outline-light">New Flash Card</a><br>
+            <a href="#" id="back" class="btn btn-outline-light">Go Back</a>
         </div>
         `
         document.getElementById("back").addEventListener("click", Course.renderIndex);
