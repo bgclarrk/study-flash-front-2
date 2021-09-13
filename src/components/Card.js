@@ -6,16 +6,7 @@ class Card {
         this.constructor.all.push(this);
     }
 
-    flipCard = (e) => {
-        let card = Card.all.find(card => card.data.id == e.target.dataset.id)
-        if (e.target.innerHTML === "Click to See Definition") {
-            e.target.innerHTML = `${card.data.definition}`;
-        } else {
-            e.target.innerHTML = "Click to See Definition";
-        }
-        e.target.addEventListener("click")
-    }
-
+    // Render a flash card
     renderCard = () => {
         const {phrase, definition, id} = this.data;
         document.getElementById("card-row").innerHTML += `
@@ -34,6 +25,7 @@ class Card {
         });
     }
 
+    // Modal to create a new flash card
     static openCardForm = (e) => {
         let course_id = e.target.dataset.id
         modal.main.innerHTML = `
@@ -57,13 +49,26 @@ class Card {
         modal.open();
     }
 
+    // Flip card to show either phrase or definition
+    flipCard = (e) => {
+        let card = Card.all.find(card => card.data.id == e.target.dataset.id)
+        if (e.target.innerHTML === "Click to See Definition") {
+            e.target.innerHTML = `${card.data.definition}`;
+        } else {
+            e.target.innerHTML = "Click to See Definition";
+        }
+    }
+
+    // Find a specific flash card
     static find = (id) => this.all.find(card => card.data.id == id);
 
+    // Used to find the card that needs to be 'flipped'
     static handleFlipClick = (e) => {
         const id = e.target.dataset.id;
         this.find(id).flipCard(e);
     }
 
+    // Used to create a new flash card and save to the DB
     static handleNewCard = (e) => {
         e.preventDefault();
         const newCard = {
@@ -71,7 +76,6 @@ class Card {
             definition: e.target.definition.value,
             course_id: parseInt(e.target.course_id.value)
         };
-        debugger;
         api.createCourseCard(newCard).then(card => {
             new Card(card).renderCard();
         });
@@ -79,6 +83,7 @@ class Card {
         e.target.reset();
     }
 
+    // Creates the necessary elements to display the flash cards
     static renderContainer = () => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("card-container");
@@ -93,6 +98,7 @@ class Card {
         this.all.forEach(card => card.renderCard());
     }
 
+    // Fetch only the cards for a specific course
     static getCards = (course_id) => {
         api.getCourseCards(course_id).then(cards => {
             cards.forEach(card => new Card(card));
@@ -100,4 +106,19 @@ class Card {
         })
     }
 
+    // Helper function just to clear out #main
+    static clearMain = () => {
+        let main = document.getElementById("main");
+        main.innerHTML = "";
+        this.renderContainer();
+    }
+
+    // Function to get every flash card regardless of course
+    static getAllCards = () => {
+        Card.all = [];
+        api.getCards().then(cards => {
+            cards.forEach(card => new Card(card));
+            this.clearMain();
+        })
+    }
 }
