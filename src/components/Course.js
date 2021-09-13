@@ -10,7 +10,7 @@ class Course {
     renderShow = () => {
         const {name, description, id} = this.data;
         document.getElementById("main").innerHTML = `
-        <div class="show">
+        <div class="show text-center">
             <h1>${name}</h1>
             <p>${description}</p>
             <a href="#" id="back" class="btn btn-primary">Back</a>
@@ -29,6 +29,8 @@ class Course {
                 <div class="card-body">
                     <div class="card-title">${name}</div>
                     <div class="card-text">${description}</div>
+                </div>
+                <div class="text-center">
                     <a href="#" id="view-course" data-id="${id}" class="btn btn-primary">View Course</a>
                 </div>
             </div>

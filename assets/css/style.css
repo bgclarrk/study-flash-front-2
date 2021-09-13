@@ -31,6 +31,10 @@ h3 {
     color: #2a008c;
 }
 
+.show {
+    padding: 5%;
+}
+
 .course-card {
     width: 24rem;
 }
@@ -43,6 +47,8 @@ h3 {
 .card-text {
     padding: 0 0 3% 0;
 }
+
+/* CSS for modal */
 
 .modal {
     display: none;
@@ -91,4 +97,13 @@ h3 {
 
 .card-body {
     background-image: url(../img/noteCard.jpg);
+    height: 200px;
+}
+
+.card-card {
+    height: 200px;
+}
+
+.definition {
+    cursor: grab;
 }

@@ -6,6 +6,16 @@ class Card {
         this.constructor.all.push(this);
     }
 
+    flipCard = (e) => {
+        let card = Card.all.find(card => card.data.id == e.target.dataset.id)
+        if (e.target.innerHTML === "Click to See Definition") {
+            e.target.innerHTML = `${card.data.definition}`;
+        } else {
+            e.target.innerHTML = "Click to See Definition";
+        }
+        e.target.addEventListener("click")
+    }
+
     renderCard = () => {
         const {phrase, definition, id} = this.data;
         document.getElementById("card-row").innerHTML += `
@@ -13,21 +23,22 @@ class Card {
             <div class="card-card">
                 <div class="card-body">
                     <div class="card-title">${phrase}</div>
-                    <div class="card-text">${definition}</div>
-                    <a href="#" id="view-card" data-id="${id}" class="btn btn-primary">Flip</a>
+                    <div class="card-text definition" data-id="${id}">
+                        Click to See Definition
+                    </div>
                 </div>
             </div>
         </div>`
-        document.querySelectorAll(`[data-id]`).forEach(button => {
-            button.addEventListener("click", Card.handleIndexClick);
+        document.querySelectorAll(`.definition`).forEach(definition => {
+            definition.addEventListener("click", Card.handleFlipClick);
         });
     }
 
     static find = (id) => this.all.find(card => card.data.id == id);
 
-    static handleIndexClick = (e) => {
+    static handleFlipClick = (e) => {
         const id = e.target.dataset.id;
-        this.find(id).renderShow();
+        this.find(id).flipCard(e);
     }
 
     static renderContainer = () => {
@@ -45,10 +56,14 @@ class Card {
     }
 
     static getCards = () => {
-        api.getCards().then(cards => {
-            cards.forEach(card => new Card(card));
+        if (Card.all.length == 0) {
+            api.getCards().then(cards => {
+                cards.forEach(card => new Card(card));
+                this.renderContainer();
+            })
+        } else {
             this.renderContainer();
-        })
+        }
     }
 
 }
