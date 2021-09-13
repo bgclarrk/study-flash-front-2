@@ -4,6 +4,8 @@ class ApiService {
         this.api = api;
     }
 
+    // Getting courses and creating courses
+
     getCourses = () => fetch(this.api + "/courses").then(resp => resp.json());
 
     createCourse = (newCourse) => {
@@ -16,6 +18,8 @@ class ApiService {
         })
         .then(resp => resp.json())
     }
+
+    // Getting cards and creating cards
 
     getCards = () => fetch(this.api + "/cards").then(resp => resp.json());
 
@@ -30,6 +34,19 @@ class ApiService {
         .then(resp => resp.json())
     }
 
+    // Getting nested cards and creating nested cards
+
     getCourseCards = (course_id) => fetch(this.api + "/courses/" + course_id + "/cards").then(resp => resp.json());
+
+    createCourseCard = (newCard) => {
+        return fetch(this.api + "/courses/" + newCard.course_id + "/cards", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCard),
+        })
+        .then(resp => resp.json())
+    }
 
 }

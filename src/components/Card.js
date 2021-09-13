@@ -34,23 +34,26 @@ class Card {
         });
     }
 
-    static openCardForm = () => {
+    static openCardForm = (e) => {
+        let course_id = e.target.dataset.id
         modal.main.innerHTML = `
         <h3 class="text-center">Create a new card</h3>
         <form>
             <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="Phrase...">
+                <input type="text" class="form-control" id="phrase" placeholder="Phrase...">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="description" placeholder="Definition...">
+                <input type="text" class="form-control" id="definition" placeholder="Definition...">
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="course_id" value="${course_id}">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
         `;
-        debugger
-        document.querySelector("form").addEventListener("submit", this.handleNewCard(e));
+        document.querySelector("form").addEventListener("submit", this.handleNewCard);
         modal.open();
     }
 
@@ -66,9 +69,10 @@ class Card {
         const newCard = {
             phrase: e.target.phrase.value,
             definition: e.target.definition.value,
-            course_id: e.target.dataset.id
+            course_id: parseInt(e.target.course_id.value)
         };
-        api.createCard(newCard).then(card => {
+        debugger;
+        api.createCourseCard(newCard).then(card => {
             new Card(card).renderCard();
         });
         modal.close();
