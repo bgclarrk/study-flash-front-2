@@ -34,11 +34,45 @@ class Card {
         });
     }
 
+    static openCardForm = () => {
+        modal.main.innerHTML = `
+        <h3 class="text-center">Create a new card</h3>
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="Phrase...">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="description" placeholder="Definition...">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        `;
+        debugger
+        document.querySelector("form").addEventListener("submit", this.handleNewCard(e));
+        modal.open();
+    }
+
     static find = (id) => this.all.find(card => card.data.id == id);
 
     static handleFlipClick = (e) => {
         const id = e.target.dataset.id;
         this.find(id).flipCard(e);
+    }
+
+    static handleNewCard = (e) => {
+        e.preventDefault();
+        const newCard = {
+            phrase: e.target.phrase.value,
+            definition: e.target.definition.value,
+            course_id: e.target.dataset.id
+        };
+        api.createCard(newCard).then(card => {
+            new Card(card).renderCard();
+        });
+        modal.close();
+        e.target.reset();
     }
 
     static renderContainer = () => {
@@ -55,15 +89,11 @@ class Card {
         this.all.forEach(card => card.renderCard());
     }
 
-    static getCards = () => {
-        if (Card.all.length == 0) {
-            api.getCards().then(cards => {
-                cards.forEach(card => new Card(card));
-                this.renderContainer();
-            })
-        } else {
+    static getCards = (course_id) => {
+        api.getCourseCards(course_id).then(cards => {
+            cards.forEach(card => new Card(card));
             this.renderContainer();
-        }
+        })
     }
 
 }
