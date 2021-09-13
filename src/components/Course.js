@@ -11,7 +11,7 @@ class Course {
         const {name, description, id} = this.data;
         document.getElementById("main").innerHTML = `
         <div class="show text-center">
-            <h1>${name}</h1>
+            <h2>${name}</h2>
             <p>${description}</p>
             <a href="#" id="back" class="btn btn-primary">Back</a>
         </div>
