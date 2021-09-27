@@ -5,7 +5,6 @@ class ApiService {
     }
 
     // Getting courses and creating courses
-
     getCourses = () => fetch(this.api + "/courses").then(resp => resp.json());
 
     createCourse = (newCourse) => {
@@ -20,7 +19,6 @@ class ApiService {
     }
 
     // Getting cards and creating cards
-
     getCards = () => fetch(this.api + "/cards").then(resp => resp.json());
 
     createCards = (newCard) => {
@@ -34,8 +32,7 @@ class ApiService {
         .then(resp => resp.json())
     }
 
-    // Getting nested cards and creating nested cards
-
+    // Getting nested cards, creating nested cards, and deleting nested cards
     getCourseCards = (course_id) => fetch(this.api + "/courses/" + course_id + "/cards").then(resp => resp.json());
 
     createCourseCard = (newCard) => {

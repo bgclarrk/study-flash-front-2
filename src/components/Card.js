@@ -66,14 +66,16 @@ class Card {
     }
 
     deleteCard = (id) => {
-        let card = Card.all.find(card => card.data.id == id)
-        api.deleteCourseCard(card.data)
+        let card = Card.all.find(card => card.data.id == id);
+        api.deleteCourseCard(card.data);
+        alert("Flash Card deleted successfully");
+        Course.renderIndex();
     }
 
     // Handle the flash card delete button
     static handleDeleteClick = (e) => {
         e.preventDefault();
-        const id = e.target.dataset.id
+        const id = e.target.dataset.id;
         this.find(id).deleteCard(id);
     }
 
